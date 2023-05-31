@@ -14,6 +14,14 @@ type Props = {
 const DirectoryItem = ({dir, openDirectory, reloadList}: Props) => {
   const [isRemoval, setIsRemoval] = useState(false);
 
+
+  const copyInputValue = () => {
+    inputRef.current.select();
+    document.execCommand('copy');
+    setCopySuccess('Input value copied to clipboard!');
+  };
+  
+
   return (
     <div onDoubleClick={() => openDirectory()}
          className={`flex text-gray-600 cursor-default flex-row justify-between border-b py-2.5 
@@ -34,11 +42,7 @@ const DirectoryItem = ({dir, openDirectory, reloadList}: Props) => {
       <div className={"w-20"}>&minus;</div>
       <div className={"w-20"}>{secondsToDate(dir.updatedAt)}</div>
       <div className={"w-32 justify-end flex gap-3"}>
-        <MdModeEdit
-          size={20}
-          onClick={() => alert('Coming soon...')}
-          className={"cursor-pointer opacity-80 hover:opacity-100"}
-        />
+      
         <ItemRemove
           idList={[dir.id]}
           itemType={"directory"}
